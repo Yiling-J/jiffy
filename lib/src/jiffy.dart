@@ -486,9 +486,14 @@ class Jiffy {
   /// print(startOfDay.format('yyyy-MM-dd HH:mm:ss'));
   /// // output: '1997-09-23 00:00:00'
   /// ```
-  Jiffy startOf(Unit unit) {
-    final dateTime =
-        _manipulator.startOf(this.dateTime, unit, _locale.startOfWeek());
+  Jiffy startOf(Unit unit, [StartOfWeek? sow]) {
+    late DateTime dateTime;
+    if (sow != null) {
+      dateTime = _manipulator.startOf(this.dateTime, unit, sow);
+    } else {
+      dateTime =
+          _manipulator.startOf(this.dateTime, unit, _locale.startOfWeek());
+    }
     return _clone(dateTime);
   }
 
